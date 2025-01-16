@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <!-- Make sure the path to the CSS file is correct -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <script>
+        var categories = {{ categories|tojson }};
+        var amounts = {{ chart_amounts | tojson }};
+        console.log(categories);  // Check if categories are properly serialized
+        console.log(amounts);  // Check if amounts are properly serialized
+    </script>
+    
+    <div class="container">
+        <h1>Personal Finance Tracker</h1>
+
+        <!-- Search/Filter Form -->
+        <form method="GET" action="/filter">
+            <input type="text" name="category" placeholder="Search by Category" value="{{ request.args.get('category', '') }}">
+            <input type="date" name="start_date" placeholder="Start Date" value="{{ request.args.get('start_date', '') }}">
+            <input type="date" name="end_date" placeholder="End Date" value="{{ request.args.get('end_date', '') }}">
+            <button type="submit">Filter</button>
+        </form>
+
+        <!-- Add Expense Form -->
+        <form action="/add" method="POST">
+            <input type="text" name="category" placeholder="Category (e.g., Food)" required>
+            <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+            <input type="date" name="date" required>
+            <button type="submit">Add Expense</button>
+        </form>
+
+        <!-- Expenses Table -->
+        <h2>Expenses</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense[0] }}</td>
+                    <td>{{ expense[1] }}</td>
+                    <td>{{ expense[2] }}</td>
+                    <td>{{ expense[3] }}</td>
+                    <td>
+                        <a href="/edit/{{ expense[0] }}">Edit</a> | 
+                        <a href="/delete/{{ expense[0] }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Total Expenses: ₹{{ total }}</h2>
+        
+        <!-- Expense Chart (using Chart.js) -->
+        <h2>Expense Breakdown</h2>
+        <canvas id="expenseChart"></canvas>
+
+        <script>
+            var ctx = document.getElementById('expenseChart').getContext('2d');
+            var expenseChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories,  // Use the categories array passed from the server
+                    datasets: [{
+                        label: 'Expenses',
+                        data: amounts,  // Use the amounts array passed from the server
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+            });
+        </script>
+    </div>
+</body>
+</html>

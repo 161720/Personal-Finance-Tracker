@@ -1,0 +1,110 @@
+/* Netflix-Inspired Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #141414; /* Dark Netflix Background */
+    color: #e5e5e5; /* Light Netflix Text */
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background: #1f1f1f; /* Slightly lighter for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Stronger shadow for depth */
+}
+
+h1, h2 {
+    text-align: center;
+    color: #e50914; /* Netflix Red for headlines */
+    font-weight: bold;
+}
+
+form {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+form input, form button {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #333; /* Neutral dark input background */
+    color: #e5e5e5; /* Light text for inputs */
+}
+
+form button {
+    background: #e50914; /* Netflix Red Button */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: #b20710; /* Slightly darker red on hover */
+    transform: scale(1.05); /* Subtle hover effect */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #1f1f1f; /* Dark background for table */
+}
+
+table th, table td {
+    border: 1px solid #333; /* Thin dark borders */
+    padding: 10px;
+    text-align: center;
+    color: #e5e5e5;
+}
+
+table th {
+    background-color: #333; /* Neutral dark for headers */
+    color: #e50914; /* Netflix Red for header text */
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #1a1a1a; /* Slight variation for rows */
+}
+
+table tr:hover {
+    background-color: #333; /* Highlight row on hover */
+    color: #fff;
+}
+
+/* Buttons */
+button {
+    background-color: #e50914; /* Netflix Red */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #b20710; /* Darker red for hover effect */
+    transform: scale(1.05); /* Subtle pop effect */
+}
+
+/* Links */
+a {
+    color: #e50914; /* Netflix Red for links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #b20710;
+}
